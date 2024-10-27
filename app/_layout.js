@@ -41,6 +41,19 @@ export default function Layout() {
         getFavorites();
     }, [])
 
+
+    // Gestión de anuncios
+    const [adTrigger, setAdTrigger] = useState(0);
+    const adsHandlerRef = createRef();
+
+    useEffect(() => {
+        if (adTrigger > 5) {
+            adsHandlerRef.current.showIntersitialAd();
+            setAdTrigger(0);
+        }
+    }, [adTrigger])
+
+
     // Esperar hasta que las fuentes se carguen
     if (!fontsLoaded) {
         return null;
@@ -48,7 +61,7 @@ export default function Layout() {
 
     return (
         <View style={styles.container}>
-            <DataContext.Provider value={{ favorites: favorites, setFavorites: setFavorites }}>
+            <DataContext.Provider value={{ favorites: favorites, setFavorites: setFavorites, setAdTrigger: setAdTrigger }}>
                 <Stack />
                 <Pressable onPress={() => router.push("/favorites")} style={ui.floatingWrapper}>
                     <Image style={ui.floatingImg} source={require("../assets/favorites.png")} />

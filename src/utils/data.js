@@ -1,7 +1,7 @@
 export const categories_raw = [
     {
         name: "Hombres",
-        image: "https://res.cloudinary.com/dfwgjw6vo/image/upload/hombres/fjwdpejwszjncczbrker"
+        image: "https://res.cloudinary.com/dfwgjw6vo/image/upload/hombres/msglzzyr2olfqcjlcb8d"
     },
     {
         name: "Mujeres",

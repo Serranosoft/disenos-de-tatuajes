@@ -2,15 +2,17 @@ import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { Link, Stack } from "expo-router";
 import { ui } from "../src/utils/styles";
 import LottieView from 'lottie-react-native';
-import { useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { categories_raw } from "../src/utils/data";
 import { Image } from "expo-image";
 import Animated from "react-native-reanimated";
+import { DataContext } from "../src/utils/DataContext";
 
 export default function List() {
 
     const [categories, setCategories] = useState([])
     useMemo(() => setCategories(categories_raw), [categories]);
+    const { setAdTrigger } = useContext(DataContext);
 
     return (
         <View style={styles.container} sharedTransitionTag="first">
@@ -30,7 +32,7 @@ export default function List() {
                                 return (
                                     <Animated.View key={i} style={styles.itemWrapper}>
                                         <Link asChild href={{ pathname: "/gallery", params: { name: item.name } }}>
-                                        <Pressable>
+                                        <Pressable onPress={() => setAdTrigger((adTrigger) => adTrigger + 1)}>
                                             <View style={styles.item}>
                                                 <Image transition={1000} style={styles.image} source={item.image} placeholder={"L8FOP=~UKOxt$mI9IAbGBQw[%MRk"} />
                                                 <View style={styles.info}>
