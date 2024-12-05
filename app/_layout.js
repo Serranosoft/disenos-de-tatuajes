@@ -5,6 +5,7 @@ import { useFonts } from "expo-font";
 import { ui } from "../src/utils/styles";
 import { getAllFavorites, initDb } from "../src/utils/storage";
 import { DataContext } from "../src/utils/DataContext";
+import AdsHandler from "../src/components/AdsHandler";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -61,6 +62,7 @@ export default function Layout() {
 
     return (
         <View style={styles.container}>
+            <AdsHandler ref={adsHandlerRef} adType={[0]} />
             <DataContext.Provider value={{ favorites: favorites, setFavorites: setFavorites, setAdTrigger: setAdTrigger }}>
                 <Stack />
                 <Pressable onPress={() => router.push("/favorites")} style={ui.floatingWrapper}>
