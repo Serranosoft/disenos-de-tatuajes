@@ -1,13 +1,12 @@
 import { Stack, useLocalSearchParams } from "expo-router";
-import { Image as ReactNativeImage, Pressable, StyleSheet, ToastAndroid, View } from "react-native";
+import { Image as ReactNativeImage, Pressable, StyleSheet, ToastAndroid, View, Alert } from "react-native";
 import Header from "../src/components/header";
 import { ui } from "../src/utils/styles";
 import * as FileSystem from 'expo-file-system';
 import * as MediaLibrary from 'expo-media-library';
-import Image from 'react-native-image-progress';
-import * as Progress from 'react-native-progress';
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import { bannerId } from "../src/utils/constants";
+import { ImageZoom } from '@likashefqet/react-native-image-zoom';
 
 export default function ImageWrapper() {
 
@@ -21,13 +20,17 @@ export default function ImageWrapper() {
             if (status === "granted") {
                 downloadImage();
             } else {
-                ToastAndroid.showWithGravityAndOffset(
-                    "No tengo permisos para acceder a la galería de su dispositivo",
-                    ToastAndroid.LONG,
-                    ToastAndroid.BOTTOM,
-                    25,
-                    50,
-                );
+                if (Platform.OS === "android") {
+                    ToastAndroid.showWithGravityAndOffset(
+                        "No tengo permisos para acceder a la galería de su dispositivo",
+                        ToastAndroid.LONG,
+                        ToastAndroid.BOTTOM,
+                        25,
+                        50,
+                    );
+                } else {
+                    Alert.alert("No tengo permisos para acceder a la galería de su dispositivo");
+                }
             }
         } catch (error) {
             console.log(error);
@@ -49,13 +52,18 @@ export default function ImageWrapper() {
                 await MediaLibrary.addAssetsToAlbumAsync([asset], album, true);
             }
 
-            ToastAndroid.showWithGravityAndOffset(
-                "Imagen guardada en tu galería en el albúm «Diseños de tatuajes»",
-                ToastAndroid.LONG,
-                ToastAndroid.BOTTOM,
-                25,
-                50,
-            );
+            
+            if (Platform.OS === "android") {
+                ToastAndroid.showWithGravityAndOffset(
+                    "Imagen guardada en tu galería en el albúm «Diseños de tatuajes»",
+                    ToastAndroid.LONG,
+                    ToastAndroid.BOTTOM,
+                    25,
+                    50,
+                );
+            } else {
+                Alert.alert("No tengo permisos para acceder a la galería de su dispositivo");
+            }
 
 
         } catch (error) {
@@ -67,19 +75,12 @@ export default function ImageWrapper() {
         <View style={styles.container}>
             <Stack.Screen options={{ header: () => <Header item={item} withFavorite={true} /> }} />
             <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
-            <Image
-                style={styles.image}
-                source={{ uri: item }}
-                resizeMode="contain"
-                indicator={Progress.Bar}
-                indicatorProps={{
-                    size: 150,
-                    height: 35,
-                    width: 275,
-                    borderWidth: 0,
-                    color: '#DA7D31',
-                    unfilledColor: 'rgba(91, 26, 35, 0.2)'
-                }}
+            <ImageZoom
+                onResetAnimationEnd={false}
+                minScale={1}
+                maxScale={3}
+                uri={ item }
+                isDoubleTapEnabled
             />
             <Pressable onPress={requestPermissions} style={[ui.floatingWrapper, { left: 15 }]}>
                 <ReactNativeImage style={[ui.floatingImg, { marginBottom: 6, marginLeft: 1 }]} source={require("../assets/download.png")} />

@@ -6,6 +6,8 @@ import { ui } from "../src/utils/styles";
 import { getAllFavorites, initDb } from "../src/utils/storage";
 import { DataContext } from "../src/utils/DataContext";
 import AdsHandler from "../src/components/AdsHandler";
+import Constants from "expo-constants";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -64,7 +66,9 @@ export default function Layout() {
         <View style={styles.container}>
             <AdsHandler ref={adsHandlerRef} adType={[0]} />
             <DataContext.Provider value={{ favorites: favorites, setFavorites: setFavorites, setAdTrigger: setAdTrigger }}>
-                <Stack />
+                <GestureHandlerRootView style={styles.wrapper}>
+                    <Stack />
+                </GestureHandlerRootView>
                 <Pressable onPress={() => router.push("/favorites")} style={ui.floatingWrapper}>
                     <Image style={ui.floatingImg} source={require("../assets/favorites.png")} />
                 </Pressable>
@@ -78,7 +82,7 @@ const styles = StyleSheet.create({
         flex: 1,
         position: "relative",
         justifyContent: "center",
-        marginTop: StatusBar.currentHeight,
+        paddingTop: Constants.statusBarHeight,
     },
     wrapper: {
         flex: 1,
