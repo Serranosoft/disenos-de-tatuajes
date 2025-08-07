@@ -14,7 +14,7 @@ export default function gallery() {
     const params = useLocalSearchParams();
     const { name } = params;
     const [images, setImages] = useState([]);
-    const { setAdTrigger } = useContext(DataContext);
+    const { setAdTrigger, adsLoaded } = useContext(DataContext);
 
     useEffect(() => {
         getImages();
@@ -35,7 +35,7 @@ export default function gallery() {
     return (
         <View style={styles.container}>
             <Stack.Screen options={{ header: () => <Header title={`${name}`} /> }} />
-            <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
+            { adsLoaded && <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} /> }
             {
                 images.length > 0 ?
                     <View style={styles.list}>

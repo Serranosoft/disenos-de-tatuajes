@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         width: "100%",
-        height: 85,
+        padding: 8,
         position: "absolute",
         bottom: 0,
         left: 0,

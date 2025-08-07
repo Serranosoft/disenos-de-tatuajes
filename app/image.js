@@ -7,15 +7,22 @@ import * as MediaLibrary from 'expo-media-library';
 import { BannerAd, BannerAdSize } from "react-native-google-mobile-ads";
 import { bannerId } from "../src/utils/constants";
 import { ImageZoom } from '@likashefqet/react-native-image-zoom';
+import { useContext } from "react";
+import { DataContext } from "../src/utils/DataContext";
 
 export default function ImageWrapper() {
 
     const params = useLocalSearchParams();
     const { item } = params;
     const imageName = item.substring(item.lastIndexOf("/") + 1, item.length);
-
+    const { adsLoaded, setShowOpenAd } = useContext(DataContext);
+    
     async function requestPermissions() {
+        
         try {
+            
+            setShowOpenAd(false);
+
             const { status } = await MediaLibrary.requestPermissionsAsync();
             if (status === "granted") {
                 downloadImage();
@@ -74,7 +81,7 @@ export default function ImageWrapper() {
     return (
         <View style={styles.container}>
             <Stack.Screen options={{ header: () => <Header item={item} withFavorite={true} /> }} />
-            <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} />
+            { adsLoaded && <BannerAd unitId={bannerId} size={BannerAdSize.ANCHORED_ADAPTIVE_BANNER} requestOptions={{}} /> }
             <ImageZoom
                 onResetAnimationEnd={false}
                 minScale={1}
