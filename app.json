@@ -1,44 +1,48 @@
 {
-    "expo": {
-        "name": "Diseños de Tatuajes",
-        "slug": "tattoo-designs",
-        "version": "1.0.0",
-        "orientation": "portrait",
-        "icon": "./assets/icono-tatuajes-aplicacion.png",
-        "userInterfaceStyle": "light",
-        "splash": {
-            "image": "./assets/splash-tatuajes.png",
-            "resizeMode": "contain",
-            "backgroundColor": "#ffffff"
-        },
-        "scheme": "tattoo-designs",
-        "ios": {
-            "supportsTablet": false
-        },
-        "android": {
-            "adaptiveIcon": {
-                "foregroundImage": "./assets/icono-tatuajes-aplicacion.png",
-                "backgroundColor": "#ffffff"
-            },
-            "versionCode": 4,
-            "package": "com.paulaymanu113.tattoodesigns"
-        },
-        "web": {
-            "favicon": "./assets/favicon.png"
-        },
-        "extra": {
-            "eas": {
-                "projectId": "56a3138c-627f-4e88-afd7-1e9e90a5c558"
-            }
-        },
-        "plugins": [
-            [
-                "react-native-google-mobile-ads",
-                {
-                    "androidAppId": "ca-app-pub-3738413299329691~7935168713",
-                    "iosAppId": "ca-app-pub-3738413299329691~7935168713"
-                }
-            ]
-        ]
-    }
+  "expo": {
+    "name": "Diseños de Tatuajes",
+    "slug": "tattoo-designs",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icono-tatuajes-aplicacion.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash-tatuajes.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "scheme": "tattoo-designs",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.paulaymanu113.tattoodesigns",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icono-tatuajes-aplicacion.png",
+        "backgroundColor": "#ffffff"
+      },
+      "versionCode": 5,
+      "package": "com.paulaymanu113.tattoodesigns"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "56a3138c-627f-4e88-afd7-1e9e90a5c558"
+      }
+    },
+    "plugins": [
+      [
+        "react-native-google-mobile-ads",
+        {
+          "androidAppId": "ca-app-pub-3738413299329691~7935168713",
+          "iosAppId": "ca-app-pub-3738413299329691~7935168713"
+        }
+      ]
+    ]
+  }
 }
