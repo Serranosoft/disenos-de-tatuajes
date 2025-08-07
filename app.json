@@ -25,7 +25,7 @@
                 "foregroundImage": "./assets/icono-tatuajes-aplicacion.png",
                 "backgroundColor": "#ffffff"
             },
-            "versionCode": 5,
+            "versionCode": 6,
             "package": "com.paulaymanu113.tattoodesigns"
         },
         "web": {
