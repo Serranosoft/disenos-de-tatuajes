@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icono-tatuajes-aplicacion.png",
     "userInterfaceStyle": "light",
+    "newArchEnabled": false,
     "splash": {
       "image": "./assets/splash-tatuajes.png",
       "resizeMode": "contain",
